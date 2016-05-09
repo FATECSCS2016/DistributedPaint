@@ -3,6 +3,7 @@ app.controller('paintController',function($scope,socket){
     var canvas = document.getElementById("paint");
     var ctx = canvas.getContext("2d");
     var started = false;
+    $scope.paintLista=null;
     $scope.mousePressed=false; 
     $scope.mouseF = function($event){
         var border=canvas.getBoundingClientRect();
@@ -28,13 +29,19 @@ app.controller('paintController',function($scope,socket){
     function sendPaint(){
         console.log("sending");
         socket.emit('criarPaint',canvas.toDataURL());
-    }
-    
+    };
+    $scope.mudaVersao = function($index){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        var img = new Image;
+        img.src = $scope.paintLista[$index].data;
+        img.onload = function(){
+            ctx.drawImage(img,0,0); // Or at whatever offset you like
+        }
+         console.log($scope.paintLista[$index].data);
+    };
     
     socket.on('atualizarLista', function (data) {
-        console.log(data);
-    });
-    socket.emit('criarPaint', {
-      message: "teste"
+        $scope.paintLista=data;
+       // $scope.$apply();
     });
 });

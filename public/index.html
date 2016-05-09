@@ -18,10 +18,8 @@
         <h1>Projeto Paint</h1>
         <canvas   width="600" height="600" id="paint" ng-mousemove="mouseF($event)" ng-mousedown="mousePressed=true" ng-mouseup="mousePressed=false">
         </canvas>
-       <canvas   width="600" height="600" id="paint2">
-        </canvas>
-        <p id="text1">ds</p>
-        <ul id="paintLista">
+        <ul ng-repeat="paintVersion in paintLista">
+            <li ng-click="mudaVersao($index)">{{paintVersion.version}}</li>
         </ul>
     </body>
 </html>
