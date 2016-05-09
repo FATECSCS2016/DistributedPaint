@@ -1,5 +1,5 @@
 angular.module('paintApp.services',[]).factory('socket', function ($rootScope) {
-  var socket = io.connect();
+  var socket = io.connect('http://paint-vapp1.rhcloud.com/');
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {  

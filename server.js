@@ -3,7 +3,7 @@ var app = express();
 var paintLista=[];
 var version = 1;
 app.use(express.static('public'));
-var server = app.listen(8080, function () {
+var server = app.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP, function () {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);
