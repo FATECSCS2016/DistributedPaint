@@ -1,0 +1,25 @@
+<html ng-app="paintApp">
+    <head>
+        <title>Projeto Paint</title>
+        <meta charset="utf-8"/>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/service.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/main.js"></script>
+        <style>
+            #paint{
+                background-color:blue;
+            }
+        </style>
+    </head>
+    <body ng-controller="paintController">
+        <h1>Projeto Paint</h1>
+        <canvas   width="600" height="600" id="paint" ng-mousemove="mouseF($event)" ng-mousedown="mousePressed=true" ng-mouseup="mousePressed=false">
+        </canvas>
+        <ul ng-repeat="paintVersion in paintLista">
+            <li ng-click="mudaVersao($index)">{{paintVersion.version}}</li>
+        </ul>
+    </body>
+</html>
