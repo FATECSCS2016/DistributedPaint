@@ -18,7 +18,7 @@ io.on('connection', function(socket)
   {
     paintLista.push({version:version,data:data});
     version++;
-    console.log(paintLista);
+   // console.log(paintLista);
     io.emit('atualizarLista',paintLista);
   });
   

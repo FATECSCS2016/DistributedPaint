@@ -23,25 +23,35 @@ app.controller('paintController',function($scope,socket){
         }
         else if(started && !$scope.mousePressed){
             started=false;
-            sendPaint();
+            //
         }
     };
     function sendPaint(){
         console.log("sending");
         socket.emit('criarPaint',canvas.toDataURL());
     };
-    $scope.mudaVersao = function($index){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        var img = new Image;
-        img.src = $scope.paintLista[$index].data;
-        img.onload = function(){
-            ctx.drawImage(img,0,0); // Or at whatever offset you like
+    $scope.mudaVersao = function(){
+        var index = $scope.selectedVersion;
+        if(index!=undefined && index!==""){
+            index--;
+            $scope.cleanCanvas();
+            var img = new Image;
+            img.src = $scope.paintLista[index].data;
+            img.onload = function(){
+                ctx.drawImage(img,0,0); // Or at whatever offset you like
+            }
+            console.log($scope.paintLista[index].data);
         }
-         console.log($scope.paintLista[$index].data);
     };
     
     socket.on('atualizarLista', function (data) {
         $scope.paintLista=data;
        // $scope.$apply();
     });
+    $scope.salvar= function(){
+        sendPaint();
+    }
+    $scope.cleanCanvas= function(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
 });
