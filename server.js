@@ -13,16 +13,7 @@ var nUsers=0;
 
 io.on('connection', function(socket)
 {
-  socket.on("login",function(name)
-  {
-    socket.name=name;
-    nUsers++;
-    console.log('The user: ' + name+" is now logged!");
-    console.log(nUsers+" usuarios logados!");
-    io.emit('receberPaint',name);
-    //io.emit('chat message', name+" logado!");
-  });
-  
+  socket.emit('atualizarLista',paintLista);
   socket.on("criarPaint",function(data)
   {
     paintLista.push({version:version,data:data});
