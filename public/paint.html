@@ -1,0 +1,31 @@
+<div id="bodyDiv">
+    <h1>Projeto Paint</h1>
+    <table>
+        <tr>
+            <td>
+                <canvas   width="800" height="600" id="paint" ng-mousemove="mouseF($event)" ng-mousedown="mousePressed=true" ng-mouseup="mousePressed=false">
+                </canvas>
+            </td>
+        <!--div id="versionList"?
+            <h1>Versoes</h1>
+            <ul ng-repeat="paintVersion in paintLista">
+                <li><button class="btn btn-default" ng:click="mudaVersao($index)">{{paintVersion.version}}</button></li>
+                
+            </ul>
+        </div-->
+            <td>
+                <h2 style="margin-top:0px;">Version</h2>
+                <select class="form-control" ng-model="selectedVersion" ng:click="mudaVersao()" id="versionList">
+                    <option ng-repeat="paintVersion in paintLista" value="{{paintVersion.version}}" ng:click="mudaVersao($index)">{{paintVersion.version}} by {{paintVersion.nome}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-default" ng:click="salvar()">Salvar</button>
+                <button class="btn btn-default" ng:click="cleanCanvas()">Limpar</button>
+            </td>
+        </tr>
+    </table>
+</div>
+

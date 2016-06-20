@@ -16,9 +16,10 @@ io.on('connection', function(socket)
   socket.emit('atualizarLista',paintLista);
   socket.on("criarPaint",function(data)
   {
-    paintLista.push({version:version,data:data});
+    console.log(data.nome);
+    paintLista.push({version:version,data:data.data,nome:data.nome});
     version++;
-    console.log(paintLista);
+   // console.log(paintLista);
     io.emit('atualizarLista',paintLista);
   });
   
@@ -28,7 +29,5 @@ io.on('connection', function(socket)
       {
         nUsers--;
       }
-       console.log(socket.name+': '+' se desconectou!');
-       io.emit('chat message',socket.name+': '+' se desconectou!');
   });
 });

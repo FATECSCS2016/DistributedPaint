@@ -3,32 +3,68 @@
         <title>Projeto Paint</title>
         <meta charset="utf-8"/>
         <script src="js/lib/jquery-1.11.3.min.js"></script>
-        <script src="js/lib/angular.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="js/app.js"></script>
         <script src="js/controller.js"></script>
         <script src="js/service.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <style>
+            .imagensC{
+                width: 20%;
+                float: left;
+            }
+            .imagens{
+                width: 100%;
+            }
+            .form-signin{
+                    max-width: 330px;
+                    padding: 15px;
+                    margin: 0 auto;
+            }
             #paint{
                 border-style: solid;
                 border-color: black;
+                float:left;
+                position: relative;
+                margin-right: 40px;
+                margin-bottom: 40px;
+                border-width: 1px;
+            }
+            #versionList{
+                width: 100%;
+                float: left;
+            }
+            #bodyDiv{
+                width: 80%;
+                margin-left: auto ;
+                margin-right: auto ;
+                background-color: white;
+            }
+            td{
+                padding: 0px;
+                top: 0px;
+                vertical-align: top;
+            }
+            body {
+                background-color:black;
             }
         </style>
+        
+        
+        
+        
+        
         <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     </head>
-    <body ng-controller="paintController">
-        <h1>Projeto Paint</h1>
-        <canvas   width="600" height="600" id="paint" ng-mousemove="mouseF($event)" ng-mousedown="mousePressed=true" ng-mouseup="mousePressed=false">
-        </canvas>
-        <h1>Versoes</h1>
-        <ul ng-repeat="paintVersion in paintLista">
-            <li ng-click="mudaVersao($index)">{{paintVersion.version}}</li>
-        </ul>
+    <body>
+        <div ui-view></div>
     </body>
 </html>
