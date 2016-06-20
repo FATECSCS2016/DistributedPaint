@@ -1,8 +1,28 @@
-var app = angular.module('paintApp',['paintApp.services']);
-app.controller('paintController',function($scope,socket){
+angular.module('paintApp.controllers',[])
+.controller('loginController',function($scope,$state,user){
+    $scope.logar=function(){
+        if($scope.inputNome==undefined || $scope.inputNome==''){
+            alert("Digite seu nome, POR FAVOR!!!!!!!!!");
+        }else{
+             console.log($scope.inputNome+" is logging!!!");
+             user.set($scope.inputNome);
+             $state.go('paint');
+        }
+    }
+})
+.controller('adminController',function($scope,socket,user){
+    $scope.paintLista=null;
+    socket.on('atualizarLista', function (data) {
+        $scope.paintLista=data;
+       // $scope.$apply();
+    });
+})
+.controller('paintController',function($scope,socket,user){
     var canvas = document.getElementById("paint");
     var ctx = canvas.getContext("2d");
     var started = false;
+ 
+    
     $scope.paintLista=null;
     $scope.mousePressed=false; 
     $scope.mouseF = function($event){
@@ -28,7 +48,12 @@ app.controller('paintController',function($scope,socket){
     };
     function sendPaint(){
         console.log("sending");
-        socket.emit('criarPaint',canvas.toDataURL());
+        console.log(user.get());
+        var data={
+            nome:user.get(),
+            data:canvas.toDataURL()
+        }
+        socket.emit('criarPaint',data);
     };
     $scope.mudaVersao = function(){
         var index = $scope.selectedVersion;
@@ -40,7 +65,7 @@ app.controller('paintController',function($scope,socket){
             img.onload = function(){
                 ctx.drawImage(img,0,0); // Or at whatever offset you like
             }
-            console.log($scope.paintLista[index].data);
+            console.log($scope.paintLista[index].nome);
         }
     };
     

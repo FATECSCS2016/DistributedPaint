@@ -1,4 +1,17 @@
-angular.module('paintApp.services',[]).factory('socket', function ($rootScope) {
+angular.module('paintApp.services',[])
+.factory('user', function () {
+  //var socket = io.connect('http://paint-vapp1.rhcloud.com/');
+  var nome = "";
+  return {
+    set: function (n) {
+      nome=n;
+    },
+    get: function () {
+      return nome;
+    }
+  };
+})
+.factory('socket', function ($rootScope) {
   //var socket = io.connect('http://paint-vapp1.rhcloud.com/');
   var socket = io.connect();
   return {
